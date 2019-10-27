@@ -1,0 +1,39 @@
+// have a slowptr, fastptr and a boolean
+// flag  = true if 2 consecutive #s are same
+// copy what's in fast to slow in all cases except when flag==true
+// time complexity: O(n)
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        
+        if (nums == null || nums.length == 0) return 0;
+        
+        int slowPtr = 0;
+        int fastPtr = 1;
+        boolean flag = false;
+        
+        while (fastPtr <= (nums.length - 1)) {
+            if (nums[fastPtr] == nums[slowPtr]) {
+                if (flag == true) {
+                    // nothing to do
+                } else {
+                   flag = true;
+                   slowPtr++;
+                   nums[slowPtr] = nums[fastPtr];
+                }
+            } else {
+                if (flag == true) {
+                    flag = false;
+                    slowPtr++;
+                    nums[slowPtr] = nums[fastPtr];
+                } else {
+                    slowPtr++;
+                    nums[slowPtr] = nums[fastPtr];
+                }
+            }              
+                
+            fastPtr++;
+        }
+    
+        return slowPtr+1;
+    }
+}
